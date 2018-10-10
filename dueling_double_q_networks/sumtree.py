@@ -1,10 +1,6 @@
 import numpy as np
 
 class SumTree(object):
-    """
-    This SumTree code is modified version of Morvan Zhou: 
-    https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow/blob/master/contents/5.2_Prioritized_Replay_DQN/RL_brain.py
-    """
     data_pointer = 0
     
     """
@@ -14,20 +10,8 @@ class SumTree(object):
         self.capacity = capacity # Number of leaf nodes (final nodes) that contains experiences
         
         # Generate the tree with all nodes values = 0
-        # To understand this calculation (2 * capacity - 1) look at the schema above
-        # Remember we are in a binary node (each node has max 2 children) so 2x size of leaf (capacity) - 1 (root node)
-        # Parent nodes = capacity - 1
-        # Leaf nodes = capacity
         self.tree = np.zeros(2 * capacity - 1)
-        
-        """ tree:
-            0
-           / \
-          0   0
-         / \ / \
-        0  0 0  0  [Size: capacity] it's at this line that there is the priorities score (aka pi)
-        """
-        
+              
         # Contains the experiences (so the size of data is capacity)
         self.data = np.zeros(capacity, dtype=object)
     
@@ -38,20 +22,12 @@ class SumTree(object):
     def add(self, priority, data):
         # Look at what index we want to put the experience
         tree_index = self.data_pointer + self.capacity - 1
-        
-        """ tree:
-            0
-           / \
-          0   0
-         / \ / \
-tree_index  0 0  0  We fill the leaves from left to right
-        """
-        
+                
         # Update data frame
         self.data[self.data_pointer] = data
         
         # Update the leaf
-        self.update (tree_index, priority)
+        self.update(tree_index, priority)
         
         # Add 1 to data_pointer
         self.data_pointer += 1
