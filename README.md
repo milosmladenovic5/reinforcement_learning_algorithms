@@ -1,6 +1,6 @@
 # reinforcement_learning_algorithms
 
-#Implementation of some reinforcement learning algorithms on various Doom game enviroments.
+Implementation of some reinforcement learning algorithms on various Doom game enviroments.
 
  - Deep Q Network
  - Policy gradient
